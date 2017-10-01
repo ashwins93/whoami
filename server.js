@@ -7,7 +7,8 @@ app.get('/', function(req, res) {
 
 app.get('/whoami', function(req, res){
   let obj = {}
-  obj.ipaddress = req.ip.replace(/^.*:/, '')
+  obj.ipaddress = req.headers['x-forwarded-for']
+        || req.connection.remoteAddress.replace(/^.*:/, '')
   obj.language = req.headers['accept-language'].replace(/,.*/, '')
   obj.software = new RegExp('\\((.*)\\)').exec(req.headers['user-agent'])[1]
   res.json(obj)
