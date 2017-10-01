@@ -12,4 +12,4 @@ app.get('/whoami', function(req, res){
   obj.software = new RegExp('\\((.*)\\)').exec(req.headers['user-agent'])[1]
   res.json(obj)
 })
-app.listen(80)
+app.listen(process.env.PORT)
